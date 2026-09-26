@@ -1,6 +1,8 @@
 package com.superdev.helpdesk.models;
 
+import com.superdev.helpdesk.enums.Papel;
 import jakarta.persistence.*;
+import jakarta.websocket.OnClose;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -24,6 +26,10 @@ public class Usuario {
     @Column(length = 254)
     private String email;
 
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20, nullable = false)
+    private Papel papel;
+    
     @Column(nullable = false)
     private boolean ativa;
 

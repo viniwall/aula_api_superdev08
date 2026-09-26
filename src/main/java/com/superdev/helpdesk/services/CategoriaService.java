@@ -2,8 +2,11 @@ package com.superdev.helpdesk.services;
 
 import com.superdev.helpdesk.dto.categoria.CategoriaAtualizarDto;
 import com.superdev.helpdesk.dto.categoria.CategoriaCriarDto;
+import com.superdev.helpdesk.dto.ticket.TicketCancelarDto;
 import com.superdev.helpdesk.models.Categoria;
+import com.superdev.helpdesk.models.Ticket;
 import com.superdev.helpdesk.repositories.CategoriaRepositorio;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,4 +57,5 @@ public class CategoriaService {
         var categoria = repository.findById(id).orElseThrow();
         return categoria;
     }
+
 }

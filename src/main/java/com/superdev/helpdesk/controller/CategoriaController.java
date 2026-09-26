@@ -2,8 +2,11 @@ package com.superdev.helpdesk.controller;
 
 import com.superdev.helpdesk.dto.categoria.CategoriaAtualizarDto;
 import com.superdev.helpdesk.dto.categoria.CategoriaCriarDto;
+import com.superdev.helpdesk.dto.ticket.TicketCancelarDto;
 import com.superdev.helpdesk.models.Categoria;
+import com.superdev.helpdesk.models.Ticket;
 import com.superdev.helpdesk.services.CategoriaService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

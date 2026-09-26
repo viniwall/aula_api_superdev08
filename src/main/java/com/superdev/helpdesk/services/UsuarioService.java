@@ -2,6 +2,7 @@ package com.superdev.helpdesk.services;
 
 import com.superdev.helpdesk.dto.usuario.UsuarioAtualizarDto;
 import com.superdev.helpdesk.dto.usuario.UsuarioCriarDto;
+import com.superdev.helpdesk.exceptions.ConflitoException;
 import com.superdev.helpdesk.models.Usuario;
 import com.superdev.helpdesk.repositories.UsuarioRepositorio;
 import org.springframework.stereotype.Service;
@@ -25,9 +26,18 @@ public class UsuarioService {
     }
 
     public Usuario criar(UsuarioCriarDto dado) {
+        String email = dado.email().trim().toLowerCase();
+        // Validar que existe o usuário com o e-mail
+        repository.findByEmail(email).ifPresent(usuario -> {
+            // Caso existir não deve permitir cadastrar outro usuário com o mesmo erro
+            // Vamos lançar uma exceção que status code 409
+            throw new ConflitoException("E-mail já cadastrado");
+        });
+
         var usuario = Usuario.builder()
                 .nome(dado.nome())
                 .email(dado.email())
+                .papel(dado.papel())
                 .ativa(true)
                 .build();
         return this.repository.save(usuario);
@@ -38,6 +48,7 @@ public class UsuarioService {
 
         usuario.setNome(dado.nome());
         usuario.setEmail(dado.email());
+        usuario.setPapel(dado.papel());
 
         return repository.save(usuario);
     }
